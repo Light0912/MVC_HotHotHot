@@ -1,0 +1,165 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body{
+    color: #fff;
+}
+
+
+/*HEADER*/
+header{
+    width: 80%;
+    margin: 0 auto;
+}
+
+header nav{
+    height: 10vh;
+    display: flex;
+    align-items: center;
+}
+
+header nav ul{
+    display: flex;
+    justify-content: space-around;
+    width: 30%;
+}
+
+header nav ul li a{
+    color: #fff;
+    font-size: 20px;
+}
+
+header nav ul li a:hover{
+    color: #dddddd;
+    text-decoration: none;
+}
+
+/*BACKGROUND GENERAL*/
+.background{
+    position: fixed;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    background-image: linear-gradient(45deg, #874da2 0%, #c43a30 100%);
+    z-index: -1;
+}
+
+/*PAGE D'ACCUEIL*/
+main{
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    width: 30%;
+    margin: 0 auto;
+}
+
+main #menu h1{
+    font-size: 70px;
+    margin: 100px 0;
+}
+
+main #menu a{
+    display: block;
+    width: 80%;
+    text-align: center;
+    color: #fff;
+    border: 3px solid #fff;
+    padding: 20px;
+    margin: 10px auto;
+    font-weight: 600;
+    font-size: 35px;
+}
+
+/*APP*/
+main{
+    width: 30%;
+}
+/*form*/
+
+#app{
+    width: 100%;
+    margin: 0 auto;
+    font-size: 20px;
+    background: #531642;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 10px;
+}
+
+#app label{
+}
+
+#app input{
+    padding: 7px;
+    font-weight: 600;
+    font-size: 20px;
+    width: 50%;
+}
+
+#app button{
+    padding: 7px;
+    font-weight: 600;
+    font-size: 20px;
+    background: #667eea;
+    border: none;
+    color: #fff;
+    border-radius: 7px;
+    cursor: pointer;
+    transition: .2s;
+    outline: none;
+}
+
+#app button:hover{
+    background: #4d5fb7;
+}
+
+/*result*/
+.result article{
+    margin: 20px 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin: 0 auto;
+}
+
+.form input{
+    width: 30%;
+    margin: 25px 0;
+    padding: 8px;
+    font-size: 14px;
+}
+
+.form button{
+    width: 30%;
+    padding: 8px;
+    font-size: 18px;
+    font-weight: 600;
+    text-transform: uppercase;
+    border: none;
+    background-image: linear-gradient(to left, #ff0844 0%, #ffb199 100%);
+    background-size: 150%;
+    color: #fff;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.form button:hover{
+    background-position: right;
+}
+
+

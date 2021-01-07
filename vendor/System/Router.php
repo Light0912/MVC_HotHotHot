@@ -5,17 +5,18 @@ namespace vendor\System;
 class Router extends System
 {
     private ?string $method;
-    private ?string $route;
     private static $route_list = null;
 
     /**
      * Router constructor.
-     * @param array $method
+     * @param string $route
+     * @param string $action
+     * @param string $method
      */
-    public function setRoute(string $route, string $method): void
+    public function setRoute(string $route, string $action, string $method = 'GET'): void
     {
-        if ("/" . $route === $_SERVER['REQUEST_URI']){
-            $this->method = $method;
+        if ("/" . $route === $_SERVER['REQUEST_URI'] && strtoupper($method) === strtoupper($_SERVER['REQUEST_METHOD'])){
+            $this->method = $action;
             self::$route_list = $this->method;
         }else{
             $this->method = null;

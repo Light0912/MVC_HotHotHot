@@ -2,13 +2,16 @@
 
 namespace vendor\System;
 
+use \vendor\System\Router;
+
 class System
 {
     public function render(string $filename, array $d = []): void
     {
         extract($d);
 
-        if (Router::getRoute()) {
+        $request = Router::getRequest();
+        if ($request !== false) {
             ob_start();
             require '../Vues/' . $filename . '.php';
             $content = ob_get_clean();

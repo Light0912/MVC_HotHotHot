@@ -5,5 +5,7 @@ $router = new Router();
 
 $router->setRoute("",  "HomeController/index");
 $router->setRoute("app", "AppController/app");
-$router->setRoute("data", "DataController/index");
+$router->setRoute("data", "DataController/index", 'index', ['GET', 'POST']);
+$router->setRoute('hello/<name>', 'HelloController/hello');
+$router->setRoute('hello', 'HelloController/hello');
 $router->setRoute(10, "DataController/index");

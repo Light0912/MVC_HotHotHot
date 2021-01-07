@@ -15,7 +15,7 @@
         <nav>
             <ul class="links">
                 <li><a href="/">Home</a></li>
-                <li><a href="<?= \vendor\System\Router::getLink('index') ?>">Générateur de Groupe</a></li>
+                <li><a href="<?= \vendor\System\Router::getLink('app') ?>">Générateur de Groupe</a></li>
                 <li><a href="/data">Database</a></li>
             </ul>
         </nav>

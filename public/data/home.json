@@ -1,0 +1,28 @@
+{
+  "sensors": [
+    {
+      "name" : "Capteur 1",
+      "type" : "temp",
+      "current_value" : 20,
+      "value_type" : "°C",
+      "last_update" : 1604399098,
+      "id" : 5
+    },
+    {
+      "name" : "Capteur 2",
+      "type" : "temp",
+      "current_value" : 20,
+      "value_type" : "°C",
+      "last_update" : 1604399098,
+      "id" : 1
+    },
+    {
+      "name" : "Capteur 3",
+      "type" : "humidity",
+      "current_value" : 80,
+      "value_type" : "%",
+      "last_update" : 1604399098,
+      "id" : 4
+    }
+  ]
+}

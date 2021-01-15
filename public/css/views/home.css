@@ -1,0 +1,108 @@
+.widget {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+}
+h3, h4 {
+    margin: 0;
+    padding: 0;
+}
+.devices {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 70%;
+    height: 15%;
+    /* border: 2px solid black; */
+    border-radius: 100px;
+    font-size: 15px;
+    transition-duration: 0.1s;
+    cursor: pointer;
+    -moz-box-shadow: 10px 10px 5px 0px #F2F3F5;
+    -webkit-box-shadow: 10px 10px 5px 0px #F2F3F5;
+    -o-box-shadow: 10px 10px 5px 0px #F2F3F5;
+    box-shadow: 10px 10px 5px 0px #b3b3b4a1;
+    filter:progid:DXImageTransform.Microsoft.Shadow(color=#F2F3F5, Direction=134, Strength=5);
+    -moz-border-radius: 10px;
+    /* -webkit-border-radius: 10px; */
+}
+.capteur-name {
+    font-size: 40px;
+}
+
+.capteur-value {
+    font-size: 30px;
+}
+.devices:hover {
+    transform: scale(1.1);
+}
+
+.separator {
+    font-size: 35px;
+}
+
+.main-info > ul {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+.capteur-logo {
+    width: 15%;
+}
+.capteur-logo > img {
+    width: 100%;
+}
+.capteur-name {
+    width: auto;
+}
+.widget-status {
+    width: 4%;
+    height: 75%;
+    scale: 0.5;
+}
+.widget-status-loading {
+    /* display: inline-block; */
+    /* position: relative; */
+    /* width: 80px; */
+    /* height: 80px; */
+    height: 100%;
+    width: 100%;
+  }
+  .widget-status-loading div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border: 8px solid #fff;
+    border-radius: 50%;
+    animation: widget-status-loading 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: #fff transparent transparent transparent;
+  }
+  .widget-status-loading div:nth-child(1) {
+    animation-delay: -0.45s;
+  }
+  .widget-status-loading div:nth-child(2) {
+    animation-delay: -0.3s;
+  }
+  .widget-status-loading div:nth-child(3) {
+    animation-delay: -0.15s;
+  }
+  @keyframes widget-status-loading {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  

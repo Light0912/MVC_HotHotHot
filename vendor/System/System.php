@@ -6,7 +6,7 @@ use \vendor\System\Router;
 
 class System
 {
-    public function render(string $filename, array $d = []): void
+    public function render(string $filename, array $d = [] , bool $isCore = true): void
     {
         extract($d);
 
@@ -15,7 +15,9 @@ class System
             ob_start();
             require '../Vues/' . $filename . '.php';
             $content = ob_get_clean();
-            require '../Vues/core/core.php';
+            if ($isCore){
+                require '../Vues/core/core.php';
+            }
         } else {
             require '../Vues/' . $filename . '.php';
         }

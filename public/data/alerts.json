@@ -1,0 +1,19 @@
+{
+  "alerts": [
+    {
+      "message": "Trop chaud ",
+      "sensor_name": "Capteur 1",
+      "sensor_id": 5
+    },
+    {
+      "message": "Trop froid",
+      "sensor_name": "Capetur 2",
+      "sensor_id": 1
+    },
+    {
+      "message": "Trop humide",
+      "sensor_name": "Capreur 3",
+      "sensor_id": 4
+    }
+  ]
+}

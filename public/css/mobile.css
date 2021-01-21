@@ -1,0 +1,120 @@
+@media screen and (min-width: 200px) and (max-width: 640px) {
+    html,
+    body,
+    main {
+        overflow: auto;
+        overflow-x: hidden;
+    }
+    .head-right {
+        display: none;
+    }
+    .head-left {
+        width: 100%;
+    }
+    .side-menu {
+        width: 100%;
+        flex-direction: column;
+    }
+    .side-menu-el {
+        width: 100%;
+    }
+    .side-menu-user {
+        height: 70%;
+    }
+    .side-menu-devices {
+        height: 30%;
+        border-top: 1px solid black;
+    }
+    .content-none-mobile  {
+        display: none;
+    }
+    .preference_menu {
+        width: 100% !important;
+    }
+    #content-embeded * {
+        font-size: 4vw;
+    }
+    .remove-mobile {
+        display: none;
+    }
+    .widget {
+        width: 100%;
+    }
+    .devices {
+        width: 100% !important;
+    }
+
+    @keyframes menu-out {
+        from {
+            transform: translateX(-0%);
+            position: relative;
+        }
+
+        40% {
+            visibility: hidden;
+        }
+
+        to {
+            width: 0;
+            visibility: hidden;
+            transform: translateX(-100%);
+        }
+    }
+    @keyframes menu-in {
+        from {
+            width: 0%;
+            visibility: hidden;
+            position: relative;
+            transform: translateX(-100%);
+        }
+
+        30% {
+            visibility: visible;
+
+        }
+
+        50% {
+            transform: translateX(-0%);
+        }
+
+        to {
+            position: relative;
+            width: 100%;
+        }
+    }
+    .modal-show {
+        animation: modal-content-show;
+        animation-delay: 0.2s;
+        animation-duration: 0.6s;
+        animation-fill-mode: forwards;
+    }
+
+    .modal > article  {
+        height: 80%;
+    }
+
+    .modal > article > header {
+        width: 90%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        border-bottom: 1px solid grey;
+    }
+    #alert-modal-list {
+        width: 90%;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    #alert-modal-list > li {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 90%;
+        justify-content: space-around;
+        border-bottom: 1px solid grey;
+        margin-bottom: 5px;
+    }
+}

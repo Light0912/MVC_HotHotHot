@@ -1,0 +1,26 @@
+<link rel="stylesheet" href="/css/views/capteur.css">
+<a id="back" onclick="window.history.back()"><img src="/assets/images/icons/left-arrow.svg" alt="">Retour</a>
+<article class="capteur_details">
+    <header>
+        <h1 id="sensor-name"></h1>
+        <small id="sensor-type"></small>
+    </header>
+    <div class="section_separator">
+        <hr>
+    </div>
+    <section class="alert-section">
+        <h4>Derniere alerte : </h4>
+        <p id="sensor-alert"></p>
+    </section>
+
+    <section>
+        <p>Valeur actuelle du capteur : <span id="sensor-value"></span> <span id="sensor-value-type"></span></p>
+    </section>
+
+    <section>
+        <canvas id="sensor-chart" width="1000px" height="370"></canvas>
+    </section>
+
+</article>
+
+<script src="/js/views/capteur.js" defer></script>

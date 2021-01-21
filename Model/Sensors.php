@@ -22,23 +22,23 @@ class Sensors extends Model
         }
     }
 
-    private function setValue($v) {
+    public function setValue($v) {
         $this->attribute['value'] = $v;
     }
 
-    private function setName($v) {
+    public function setName($v) {
         $this->attribute['name'] = $v;
     }
 
-    private function getId($v) {
+    private function getId() {
         return $this->attribute['id'];
     }
 
-    private function getValue($v) {
+    public function getValue() {
         return $this->attribute['value'];
     }
 
-    private function getName($v) {
+    public function getName() {
         return $this->attribute['name'];
     }
 

@@ -95,11 +95,16 @@ class Request
 
     public function isPOST(): bool
     {
-        return $this->route['method'] === 'POST';
+        return $_SERVER['REQUEST_METHOD'] === 'POST';
     }
 
     public function isGET(): bool
     {
-        return $this->route['method'] === 'GET';
+        return $_SERVER['REQUEST_METHOD'] === 'GET';
+    }
+
+    public function get($name): string
+    {
+        return $_POST[$name];
     }
 }

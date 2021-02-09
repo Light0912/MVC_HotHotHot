@@ -23,7 +23,13 @@ class System
         }
     }
 
-    public function getDatabase(): \PDO
+    public function redirect($url): void
+    {
+        header("Location: " . $url);
+        exit();
+    }
+
+    public static function getDatabase(): \PDO
     {
         $pdo = new Database();
 

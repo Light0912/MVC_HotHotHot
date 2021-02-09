@@ -25,6 +25,9 @@
                 <li>
                     <a href="#/">Acceuil</a>
                 </li>
+                <li>
+                    <a href="docs">Documentation</a>
+                </li>
             </ul>
         </section>
         <section class="side-menu-el side-menu-devices">

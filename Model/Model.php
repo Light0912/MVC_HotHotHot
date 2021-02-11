@@ -4,6 +4,7 @@
 namespace Model;
 
 
+use PDO;
 use vendor\System\System;
 
 
@@ -21,13 +22,17 @@ class Model extends System
         self::$tableName = $tableName;
 
         try {
-            $data = $db->query("SELECT * FROM " . $tableName . ' WHERE ' . $where . ' LIMIT 1')->fetchAll(MYSQLI_ASSOC)[0];
-            self::$id = $data['id'];
+            $data = $db->query("SELECT * FROM " . $tableName . ' WHERE ' . $where . ' LIMIT 1')->fetchAll(PDO::FETCH_ASSOC);
+            self::$id = $data[0]['id'];
         } catch (\Exception $e) {
             $data = false;
         }
+        return $data[0];
+    }
 
-        return $data;
+    public function getAllData($tableName, $where = "true"): bool|array{
+        $db = self::getDatabase();
+        return $db->query("SELECT * FROM $tableName WHERE $where")->fetchAll(PDO::FETCH_ASSOC);
     }
 
     protected function updateLocalData() : void {
@@ -47,7 +52,6 @@ class Model extends System
             $columns .= $key . ', ';
             $values .= '"' . $val . '", ';
         }
-
         $columns = substr($columns, strlen($columns) - 2);
         $values = substr($values, strlen($values) - 2);
 
@@ -60,7 +64,6 @@ class Model extends System
         } catch (\Exception $e) {
             $id = false;
         }
-
         return $id;
     }
 

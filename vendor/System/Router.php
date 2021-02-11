@@ -49,7 +49,9 @@ class Router extends System
     public static function getLink(string $name) : string|bool {
         $route = self::resolve($name);
         if ($route === false) return false;
-        return (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . '://' . $_SERVER['HTTP_HOST'] . '/' . $route['url'];
+        return (
+            isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http"
+            ) . '://' . $_SERVER['HTTP_HOST'] . '/' . $route['url'];
     }
 
     public static function getRequest(): Request|bool

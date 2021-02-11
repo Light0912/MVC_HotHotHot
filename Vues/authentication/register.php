@@ -4,7 +4,6 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?= $request->getSiteUrl() ?>css/authentication.css">
     <title>Inscription d'utilisateur</title>
 </head>
@@ -14,7 +13,7 @@
 <div class="App">
     <div class="vertical-center">
         <div class="inner-block">
-            <form action="login" method="post">
+            <form action="" method="post">
                 <h3>Inscription</h3>
                 <div class="form-group">
                     <label>Prénom</label>

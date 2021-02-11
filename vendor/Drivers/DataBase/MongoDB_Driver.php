@@ -2,6 +2,9 @@
 
 namespace vendor\Drivers\DataBase;
 
+use MongoClient;
+use MongoDB;
+
 class MongoDB_Driver implements DataBaseInterface
 {
 

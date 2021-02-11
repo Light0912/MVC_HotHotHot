@@ -10,33 +10,33 @@
 
 <body>
 
-    <!-- Login form -->
-    <div class="App">
-        <div class="vertical-center">
-            <div class="inner-block">
-                <form action="home" method="post">
-                    <h3>Connectez vous a votre espace domotique</h3>
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" class="form-control" name="email_signin" id="email_signin" />
-                    </div>
+<!-- Login form -->
+<div class="App">
+    <div class="vertical-center">
+        <div class="inner-block">
+            <form action="" method="post">
+                <h3>Connectez vous a votre espace domotique</h3>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" class="form-control" name="email_signin" id="email_signin" />
+                </div>
 
-                    <div class="form-group">
-                        <label>Mot de passe</label>
-                        <input type="password" class="form-control" name="password_signin" id="password_signin" />
-                    </div>
+                <div class="form-group">
+                    <label>Mot de passe</label>
+                    <input type="password" class="form-control" name="password_signin" id="password_signin" />
+                </div>
 
-                    <button type="submit" name="login" id="sign_in"
+                <button type="submit" name="login" id="sign_in"
                         class="btn btn-outline-primary btn-lg btn-block">Se connecter</button>
 
-                    <div>
-                        <b>Pas encore inscrit ?</b>
-                        <a href="register">Inscription</a>
-                    </div>
-                </form>
-            </div>
+                <div>
+                    <b>Pas encore inscrit ?</b>
+                    <a href="register">Inscription</a>
+                </div>
+            </form>
         </div>
     </div>
+</div>
 
 </body>
 

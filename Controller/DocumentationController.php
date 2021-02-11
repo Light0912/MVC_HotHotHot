@@ -68,8 +68,8 @@ class DocumentationController extends System
     public function doc(Request $request)
     {
         $id = $request->getUrlParams()['id'];
-        $documentation = Documentation::get("id = " . $id);
-        $file = $documentation['cache_url'];
+        $documentation = Documentation::get("id = {$id}");
+        $file = $documentation->getCacheUrl();
         if ($this->isCache($file)) {
             $this->readCache($file);
             exit();
@@ -78,38 +78,33 @@ class DocumentationController extends System
                 $this->render(
                     "documentation/doc", ["doc" => $documentation]
                 ),
-                $documentation['id']
+                $documentation->getId()
             );
         }
     }
 
     public function delete(Request $request)
     {
-        $id = $request->getUrlParams()['id'];
-        $documentation = Documentation::get("id = " . $id)[0];
-        $query = self::getDatabase()->prepare(
-            "DELETE FROM `docs` WHERE id = '$id'"
-        );
+        $id = (int) $request->getUrlParams()['id'];
+        $documentation = Documentation::get("id = {$id}");
+        $documentation->delete();
+        unlink($documentation->getCacheUrl());
 
-        $query->execute();
-        unlink($documentation['cache_url']);
         $this->redirect("/docs");
     }
 
-    public function update(Request $request)
+    public function update(Request $request): bool|string
     {
         $id = $request->getUrlParams()['id'];
-        $documentation = Documentation::get("id = " . $id)[0];
-        var_dump($documentation['cache_url']);
+        $documentation = Documentation::get("id = {$id}");
         if ($request->isPOST()) {
-            $query = self::getDatabase()->prepare(
-                "UPDATE `docs` SET title = ?, content = ?"
-            );
-            $query->execute([$request->get("title"), $request->get("content")]);
-            if ($documentation['cache_url'] !== "") {
-                unlink($documentation['cache_url']);
+            $documentation->setTitle($request->get("title"));
+            $documentation->setContent($request->get("content"));
+            $documentation->update();
+            if ($documentation->getCacheUrl() !== "") {
+                unlink($documentation->getCacheUrl());
             }
-            $this->redirect("/doc/$id");
+            $this->redirect("/doc/{$id}");
         }
         return $this->render("documentation/update", ["doc" => $documentation]);
     }

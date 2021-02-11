@@ -2,6 +2,7 @@
 
 namespace vendor\System;
 
+use Model\Documentation;
 use \vendor\System\Router;
 
 class System
@@ -28,7 +29,6 @@ class System
         header("Location: " . $url);
         exit();
     }
-
 
     protected static function getDatabase(): \PDO
     {
@@ -75,10 +75,9 @@ class System
     protected function onCache($content, $id)
     {
         $file = self::writeCache($content);
-        $query = self::getDatabase()->prepare(
-            "UPDATE `docs` SET cache_url = '$file' WHERE id = '$id'"
-        );
-        $query->execute();
+        $documentation = Documentation::get("id = " . $id);
+        $documentation->setCacheUrl($file);
+        $documentation->update();
     }
 
     protected function renderTree($tree, $key, $id): string

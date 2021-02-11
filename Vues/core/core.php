@@ -69,7 +69,7 @@
                     <a href="#/">Accueil</a>
                 </li>
                 <li>
-                    <a href="docs">Documentation</a>
+                    <a href="#/documentation">Documentation</a>
                 </li>
             </ul>
         </section>
@@ -123,6 +123,7 @@
     <script src="js/controllers/capteurController.js"></script>
     <script src="js/controllers/homeController.js"></script>
     <script src="js/controllers/maisonController.js"></script>
+    <script src="js/controllers/documentationController.js"></script>
     <script src="js/router.js"></script>
     <script src="js/app.js"></script>
     <script src="js/alert.js"></script>

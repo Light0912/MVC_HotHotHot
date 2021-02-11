@@ -3,7 +3,8 @@
 const routes = [
     { path: '/', component: HomeController},
     { path : '/maison', component : MaisonController},
-    {path : '/capteur', component: CapteurController}
+    { path : '/capteur', component: CapteurController},
+    { path : '/documentation', component: DocumentationController}
 ]
 
 const parseLocation = () => {

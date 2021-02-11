@@ -40,6 +40,10 @@ class Model extends System
         }
     }
 
+    public function export(): array {
+        return $this->attribute;
+    }
+
     public function create(): bool|string
     {
         System::$db->insert(self::$tableName , $this->attribute);

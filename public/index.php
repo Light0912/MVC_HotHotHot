@@ -1,8 +1,8 @@
 <?php
 
+use vendor\System\Exception\SystemException;
 use vendor\System\Router;
 use vendor\System\System;
-use vendor\System\SystemException;
 
 include '../vendor/autoload.php';
 include '../config/route.php';

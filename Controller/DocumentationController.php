@@ -15,13 +15,13 @@ class DocumentationController extends System
         foreach ($parents as $parent) {
             $id = (int)$parent['id'];
             $childrens = $documentation->getAllData(
-                "docs", "parent_id = {$id}"
+                "docs", ['parent_id' => $id]
             );
             if ($childrens) {
                 foreach ($childrens as $children) {
                     $id = (int)$children['id'];
                     $sub_childrens = $documentation->getAllData(
-                        "docs", "parent_id = {$id}"
+                        "docs", ['parent_id' => $id]
                     );
                     if ($sub_childrens) {
                         foreach ($sub_childrens as $sub_children){
@@ -34,9 +34,14 @@ class DocumentationController extends System
             $tree[] = $parent;
         }
 
+        echo json_encode($tree);
+        return "";
+
+        /*
         return $this->render('documentation/home', [
             "tree" => $this->renderTree($tree, 'title', 'id'),
         ]);
+        */
     }
 
     public function create(Request $request): bool|string
@@ -68,7 +73,10 @@ class DocumentationController extends System
     public function doc(Request $request)
     {
         $id = $request->getUrlParams()['id'];
-        $documentation = Documentation::get("id = {$id}");
+        $documentation = Documentation::get(['id' => $id]);
+        echo json_encode($documentation->export());
+        return "";
+
         $file = $documentation->getCacheUrl();
         if ($this->isCache($file)) {
             $this->readCache($file);

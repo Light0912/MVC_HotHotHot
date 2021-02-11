@@ -53,6 +53,9 @@ class System
     private static function writeCache($content): bool|string
     {
         $cache_directory = "cache/";
+        if(!is_dir($cache_directory)){
+            mkdir($cache_directory);
+        }
         $token = str_shuffle(hash("md5", "abcdefghabcdefghabcdefghabcdefgh"));
         ob_start();
         echo $content;

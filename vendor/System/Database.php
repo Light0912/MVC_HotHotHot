@@ -4,34 +4,42 @@
 namespace vendor\System;
 
 
-use PDO;
+use vendor\Drivers\DataBase\DataBaseInterface;
+use vendor\System\Exception\DataBaseException;
+use vendor\System\Exception\SystemException;
 
 class Database
 {
-    private static PDO|null $pdo = null;
+    private array $config;
 
-    public function useDatabase(): PDO
+    public function __construct()
     {
-        $debug = true;
-        $database_config = parse_ini_file(
-            "../config/config.ini",
-            true);
-        if (is_array($database_config)) {
-            if ($debug) {
-                $database_config = $database_config['development'];
-            } else {
-                $database_config = $database_config['production'];
-            }
-        }
+        $this->loadConfig();
+    }
 
-        if (!self::$pdo) {
-            self::$pdo = new PDO(
-                'mysql:host=' . $database_config['hostname'] .
-                ';dbname=' . $database_config['database'],
-                $database_config['username'],
-                $database_config['password']
-                , [PDO::ATTR_ERRMODE => 2, PDO::FETCH_ASSOC => 1]);
+    private function loadConfig () {
+        $config_key = (System::$config['dev'] == 'true' || System::$config['dev'] == 1) ? 'DB-DEV' : 'DB-PROD';
+        $this->config = System::$config[$config_key];
+    }
+
+
+    public function useDatabase(): DataBaseInterface
+    {
+        $driver = $this->config['DBDriver'];
+        $class = "vendor\Drivers\DataBase\\$driver";
+        if (class_exists($class, true)) {
+
+            /** @var DataBaseInterface $driverClass */
+            $driverClass = new $class($this->config);
+
+            if ($driverClass->testConnection()) {
+                return $driverClass;
+            } else {
+                throw new DataBaseException("Impossible d'etablir la connexion avec la base de données");
+            }
+
+        } else {
+            throw new SystemException("Impossible de charger le driver : $driver ");
         }
-        return self::$pdo;
     }
 }

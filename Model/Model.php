@@ -17,28 +17,19 @@ class Model extends System
     private static int $id;
     private static string $where;
 
-    protected static function getData($tableName, $where): bool|array
+    protected static function getData($tableName, array $where): bool|array
     {
-        $db = self::getDatabase();
         self::$tableName = $tableName;
 
-        try {
-            $data = $db->query("SELECT * FROM " . $tableName . ' WHERE ' . $where . ' LIMIT 1')->fetch(PDO::FETCH_ASSOC);
-            if (!$data) {
-                http_response_code(404);
-                exit();
-            }
-        } catch (\Exception $e) {
-            $data = false;
-        }
+        $data = System::$db->get(self::$tableName, $where);
+
         self::$id = $data['id'];
         return $data;
     }
 
-    public function getAllData($tableName, $where = "true"): bool|array
+    public function getAllData(string $tableName, array $where = [1 => 1]): bool|array
     {
-        $db = self::getDatabase();
-        return $db->query("SELECT * FROM $tableName WHERE $where")->fetchAll(PDO::FETCH_ASSOC);
+        return System::$db->getAll($tableName, $where);
     }
 
     protected function updateLocalData(): void
@@ -51,48 +42,17 @@ class Model extends System
 
     public function create(): bool|string
     {
-        $columns = '';
-        $values = '';
-        $query = 'INSERT INTO ' . self::$tableName;
-
-        foreach ($this->attribute as $key => $val) {
-            $columns .= $key . ', ';
-            $values .= '"' . $val . '", ';
-        }
-        $columns = substr($columns, strlen($columns) - 2);
-        $values = substr($values, strlen($values) - 2);
-
-        $query .= '(' . $columns . ') VALUES (' . $values . ')';
-
-        try {
-            $this->getDatabase()->query($query);
-            $id = $this->getDatabase()->lastInsertId(self::$tableName);
-            $this->attribute['id'] = $id;
-        } catch (\Exception $e) {
-            $id = false;
-        }
-        return $id;
+        System::$db->insert(self::$tableName , $this->attribute);
     }
 
     public function update(): void
     {
-        $id = self::$id;
-        $query = 'UPDATE ' . self::$tableName . ' SET ';
-        foreach ($this->attribute as $key => $val) {
-            $query .= $key . ' = "' . $val . '", ';
-        }
-        $query = substr($query, 0, strlen($query) - 2);
-        $query .= "WHERE id = {$id}";
-        $this->getDatabase()->query($query);
+        System::$db->edit(self::$tableName, self::$id, $this->attribute);
     }
 
     public function delete(): void
     {
-        $id = self::$id;
-        $query = 'DELETE FROM ' . self::$tableName;
-        $query .= " WHERE id = {$id}";
-        var_dump($query);
-        $this->getDatabase()->query($query);
+        System::$db->delete(self::$tableName, self::$id);
     }
 
 }

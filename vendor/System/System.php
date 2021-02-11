@@ -3,10 +3,39 @@
 namespace vendor\System;
 
 use Model\Documentation;
+use vendor\Drivers\DataBase\DataBaseInterface;
 use \vendor\System\Router;
+use \vendor\System\Exception\SystemException;
 
 class System
 {
+
+    public static array $config;
+    public static DataBaseInterface $db;
+
+    public function __construct()
+    {
+        $this->loadConfig();
+        $this->loadDataBase();
+    }
+
+    private function loadDataBase() {
+            $db = new Database();
+            self::$db = $db->useDatabase();
+    }
+
+    private function loadConfig () {
+        $config_file_path = __DIR__ .'/../../config/config.ini';
+        if (!file_exists($config_file_path)) {
+            throw new SystemException("Impossible de trouver le fichier de configuration, chemin testé : $config_file_path");
+        }
+        try {
+            self::$config = parse_ini_file($config_file_path,true);
+        } catch (\Exception $e) {
+            throw new SystemException("Impossible de parser le fichier de configuration");
+        }
+    }
+
     protected function render(string $filename, array $d = [], bool $isCore = true): bool|string
     {
         extract($d);
@@ -30,10 +59,8 @@ class System
         exit();
     }
 
-    protected static function getDatabase(): \PDO
-    {
-        $pdo = new Database();
-        return $pdo->useDatabase();
+    protected static function getDatabase(): \DataBaseInterface {
+        return self::$db;
     }
 
     protected function isCache($file): bool

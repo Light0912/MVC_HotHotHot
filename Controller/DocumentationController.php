@@ -9,7 +9,7 @@ class DocumentationController extends System
     public function home(): bool|string
     {
         $documentation = new Documentation();
-        $parents = $documentation->getAllData("docs", "parent_id = 0");
+        $parents = $documentation->getAllData("docs", ['parent_id' => 0]);
         $tree = [];
 
         foreach ($parents as $parent) {

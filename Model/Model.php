@@ -4,6 +4,7 @@
 namespace Model;
 
 
+use PDO;
 use vendor\System\System;
 
 
@@ -21,18 +22,17 @@ class Model extends System
         self::$tableName = $tableName;
 
         try {
-            $data = $db->query("SELECT * FROM " . $tableName . ' WHERE ' . $where . ' LIMIT 1')->fetchAll();
+            $data = $db->query("SELECT * FROM " . $tableName . ' WHERE ' . $where . ' LIMIT 1')->fetchAll(PDO::FETCH_ASSOC);
             self::$id = $data[0]['id'];
         } catch (\Exception $e) {
             $data = false;
         }
-
-        return $data;
+        return $data[0];
     }
 
     public function getAllData($tableName, $where = "true"): bool|array{
         $db = self::getDatabase();
-        return $db->query("SELECT * FROM $tableName WHERE $where")->fetchAll();
+        return $db->query("SELECT * FROM $tableName WHERE $where")->fetchAll(PDO::FETCH_ASSOC);
     }
 
     protected function updateLocalData() : void {

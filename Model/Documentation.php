@@ -25,6 +25,11 @@ class Documentation extends Model
         $this->attribute['content'] = $v;
     }
 
+    public function setParentId($v)
+    {
+        $this->attribute['parent_id'] = $v;
+    }
+
     private function getId()
     {
         return $this->attribute['id'];
@@ -39,4 +44,10 @@ class Documentation extends Model
     {
         return $this->attribute['content'];
     }
+
+    public function getParentId(): int
+    {
+        return $this->attribute['parent_id'];
+    }
+
 }

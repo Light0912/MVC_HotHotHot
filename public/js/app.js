@@ -7,7 +7,7 @@ let alreadyOpen = false
 let isSideMenuIsOpen = false
 let isPreferenceMenuIsOpen = false
 let modalAlertIsOpen = false
-const sideMenu = document.getElementById('side-menu') 
+const sideMenu = document.getElementById('side-menu')
 const content = document.getElementById('content')
 
 const hours = document.getElementById('hours')
@@ -33,7 +33,7 @@ let setEventForSideMenu = () => {
             preferenceMenu.style.width = '0%'
             isPreferenceMenuIsOpen = false
         }
-        if (!alreadyOpen) sideMenu.classList.remove('side-menu-hidden-brut') 
+        if (!alreadyOpen) sideMenu.classList.remove('side-menu-hidden-brut')
         alreadyOpen = true
         if (isSideMenuIsOpen) {
             sideMenu.classList.add('side-menu-hidden-fluid')
@@ -47,38 +47,43 @@ let setEventForSideMenu = () => {
         isSideMenuIsOpen = !isSideMenuIsOpen
     })
 
-    document.getElementById('content').addEventListener('click', (e) => {
-        if (isSideMenuIsOpen) {
-            sideMenu.classList.add('side-menu-hidden-fluid')
-            sideMenu.classList.remove('side-menu-show')
-            content.classList.remove('content-none-mobile')
-            isSideMenuIsOpen = !isSideMenuIsOpen
+        const content = document.getElementById('content');
+        if (content){
+            content.addEventListener('click', (e) => {
+                if (isSideMenuIsOpen) {
+                    sideMenu.classList.add('side-menu-hidden-fluid')
+                    sideMenu.classList.remove('side-menu-show')
+                    content.classList.remove('content-none-mobile')
+                    isSideMenuIsOpen = !isSideMenuIsOpen
+                }
+                if (isPreferenceMenuIsOpen) {
+                    preferenceMenu.style.display = 'none'
+                    preferenceMenu.style.width = '0%'
+                    isPreferenceMenuIsOpen = false
+                }
+            })
         }
-        if (isPreferenceMenuIsOpen) {
-            preferenceMenu.style.display = 'none'
-            preferenceMenu.style.width = '0%'
-            isPreferenceMenuIsOpen = false
-        }
-    })
 }
 
 let generateMenuPreference = () => {
     let list = document.getElementById('bgcolor_list')
-    for (let i in color.getAllColor())  {
-        let el = color.getAllColor()[i]
-        let li = document.createElement('li')
-        li.setAttribute('color_id' , i)
-        li.addEventListener('click', (e) => color.setCurrentColor(e.target.getAttribute('color_id')))
-        li.classList.add('color-box')
-        li.title = el['name']
-        li.style.backgroundColor = el['primary']
-        list.appendChild(li)
+    if (list){
+        for (let i in color.getAllColor()) {
+            let el = color.getAllColor()[i]
+            let li = document.createElement('li')
+            li.setAttribute('color_id', i)
+            li.addEventListener('click', (e) => color.setCurrentColor(e.target.getAttribute('color_id')))
+            li.classList.add('color-box')
+            li.title = el['name']
+            li.style.backgroundColor = el['primary']
+            list.appendChild(li)
+        }
     }
 }
 
 let setHoursAndDate = () => {
     let date = new Date()
-    hours.innerText = utils.pad(date.getHours(),2)
+    hours.innerText = utils.pad(date.getHours(), 2)
     dayName.innerText = utils.getDayCorrespondance(date.getDay())
     day.innerText = utils.pad(date.getDate(), 2)
     years.innerText = date.getFullYear()
@@ -92,11 +97,12 @@ let setUserPreference = () => {
     let avatar = document.getElementById('avatar')
     let firstname = document.getElementById('firstname')
     let lastname = document.getElementById('lastname')
-
-    firstname.innerText = user.userData('firstname')
-    lastname.innerText = user.userData('lastname')
-    if (user.userData('avatar') !== '') {
-        avatar.img = user.userData('avatar')
+    if (firstname){
+        firstname.innerText = user.userData('firstname')
+        lastname.innerText = user.userData('lastname')
+        if (user.userData('avatar') !== '') {
+            avatar.img = user.userData('avatar')
+        }
     }
 }
 
@@ -137,9 +143,11 @@ window.addEventListener('hashchange', () => {
 
 let init = () => {
 
-
-    document.getElementById('preference').addEventListener('click', showPreference)
-    document.getElementById('logout').addEventListener('click', user.logout)
+    const preference = document.getElementById('preference');
+    if (preference) {
+        document.getElementById('preference').addEventListener('click', showPreference)
+        document.getElementById('logout').addEventListener('click', user.logout)
+    }
 
     alertShowButton.addEventListener('click', showAlertModal)
     modalAlert.addEventListener('click', hideAlertModal)

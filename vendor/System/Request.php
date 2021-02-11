@@ -6,7 +6,6 @@ namespace vendor\System;
 
 class Request
 {
-
     private string $url;
     private array $urlParams = [];
     private array $postParams = [];

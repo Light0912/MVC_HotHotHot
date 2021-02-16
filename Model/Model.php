@@ -4,16 +4,14 @@
 namespace Model;
 
 
-use PDO;
 use vendor\System\System;
-use vendor\System\SystemException;
 
 
 class Model extends System
 {
 
     protected array $attribute = [];
-    private static string $tableName;
+    private static ?string $tableName = null;
     private static int $id;
     private static string $where;
 
@@ -40,13 +38,14 @@ class Model extends System
         }
     }
 
-    public function export(): array {
+    public function export(): array
+    {
         return $this->attribute;
     }
 
-    public function create(): bool|string
+    public function create($tableName): void
     {
-        System::$db->insert(self::$tableName , $this->attribute);
+        System::$db->insert($tableName, $this->attribute);
     }
 
     public function update(): void

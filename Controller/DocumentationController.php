@@ -2,6 +2,7 @@
 
 use Model\Documentation;
 use vendor\System\Request;
+use vendor\System\Router;
 use vendor\System\System;
 
 class DocumentationController extends System
@@ -24,11 +25,11 @@ class DocumentationController extends System
                         "docs", ['parent_id' => $id]
                     );
                     if ($sub_childrens) {
-                        foreach ($sub_childrens as $sub_children){
+                        foreach ($sub_childrens as $sub_children) {
                             $children[] = $sub_children;
                         }
                     }
-                $parent[] = $children;
+                    $parent[] = $children;
                 }
             }
             $tree[] = $parent;
@@ -36,7 +37,6 @@ class DocumentationController extends System
 
         echo json_encode($tree);
         return "";
-
         /*
         return $this->render('documentation/home', [
             "tree" => $this->renderTree($tree, 'title', 'id'),
@@ -53,16 +53,8 @@ class DocumentationController extends System
             $documentation->setTitle($request->get("title"));
             $documentation->setContent($request->get("content"));
             $documentation->setParentId($request->get("parent_id"));
-            $query = self::getDatabase()->prepare(
-                'INSERT INTO docs SET title = ?, content = ?, parent_id = ?'
-            );
-            var_dump($documentation->getParentId());
-            $query->execute([
-                $documentation->getTitle(),
-                $documentation->getContent(),
-                (int)$documentation->getParentId()
-            ]);
-            $this->redirect("/docs");
+            $documentation->create('docs');
+            $this->redirect(Router::getLink("HomeDocView"));
         }
 
         return $this->render("documentation/create", [
@@ -93,12 +85,12 @@ class DocumentationController extends System
 
     public function delete(Request $request)
     {
-        $id = (int) $request->getUrlParams()['id'];
+        $id = (int)$request->getUrlParams()['id'];
         $documentation = Documentation::get("id = {$id}");
         $documentation->delete();
         unlink($documentation->getCacheUrl());
 
-        $this->redirect("/docs");
+        $this->redirect(Router::getLink("HomeDocView"));
     }
 
     public function update(Request $request): bool|string

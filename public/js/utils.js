@@ -49,7 +49,8 @@ class Utils {
     getTimeFrom(timestamp) {
         let current_time = Math.round(new Date().getTime() / 1000);
         let date = new Date(null)
-        date.setSeconds(current_time - timestamp)
+        date.setSeconds(timestamp - current_time)
+        date.setHours(date.getHours() - 1)
         let str = ""
         if (date.getHours() > 0 ) {
             str = date.getHours() + " heures " + date.getMinutes() + " minutes " + date.getSeconds() + " secondes"

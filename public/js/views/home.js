@@ -2,15 +2,17 @@
 
    "use strict"
 
-   let searchArticle = (path) => {
-      let result = false
-      path.forEach((el) => {
-         if (el.tagName !== undefined && el.tagName.toLowerCase() === 'article' && el.classList.contains('devices') && el.hasAttribute('sensor_id')) {
-            result = el
-         }
-      })
-      return result
-   }
+   // let searchArticle = (path) => {
+   //    let result = false
+   //    path.forEach((el) => {
+   //       if (el.tagName !== undefined && el.tagName.toLowerCase() === 'article' && el.classList.contains('devices') && el.hasAttribute('sensor_id')) {
+   //          result = el
+   //       }
+   //    })
+   //    return result
+   // }
+
+
 
    let createSensor = (parent, sensor) => {
       let article = document.createElement('article')
@@ -71,12 +73,33 @@
          window.location.hash =  '/capteur:' + el.getAttribute('sensor_id')
       })
    }
-
    let widget = document.getElementById('widget')
+   let ws = new WebSocket("wss://ws.hothothot.dog:9502")
 
-   Array.from(window.data.home.sensors).forEach((el) => {
-      createSensor(widget, el)
-   })
+   ws.onopen = function (event){
+      console.log(event);
+      ws.send('Bonjour')
+   }
+
+   ws.onerror = function (event){
+      console.log(event);
+   }
+
+   ws.onmessage = function (event){
+
+
+
+      widget.innerHTML = "";
+      console.log(event.data);
+      let data = JSON.parse(event.data)
+      data = data["capteurs"]
+      for (let i = 0 ; i < data.length; ++i){
+         let parsed = {name: data[i]['Nom'], type: "temp", current_value: data[i]["Valeur"], value_type: "°C", last_update: data[i]["Timestamp"], id: data[i]['Nom']}
+         createSensor(widget, parsed)
+      }
+
+
+   }
 
 })()
 

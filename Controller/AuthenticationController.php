@@ -28,8 +28,8 @@ class AuthenticationController extends System
 //            $user->setMobile("a");
 //            $user->setPassword("a");
 //            var_dump($user->getAllData("user"));
-            var_dump($user->getAllData("user", ['id' => 1]));
-            $user->create();
+//            var_dump($user->getAllData("user", ['id' => 1]));
+//            $user->create();
             $this->redirect('/');
         }
 

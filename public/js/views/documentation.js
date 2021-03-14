@@ -2,6 +2,7 @@
     "use strict"
 
     let parent = document.getElementById('widget')
+    let d = window.data['documentation']
 
     let searchDocumentation = (path) => {
         let result = false
@@ -13,6 +14,7 @@
         return result
     }
 
+
     let createNewElementInList = (ul, data) => {
         let li = document.createElement('li')
         li.innerHTML = '<strong>' + data.title + '</strong> (id : ' + data.id + ' )'
@@ -22,38 +24,41 @@
 
         li.addEventListener('click', (e) => {
             let el = searchDocumentation(e.path)
-            window.location.hash =  '/documentation:' + el.getAttribute('documentation_id')
+            window.location.hash = '/documentation:' + el.getAttribute('documentation_id')
         })
-
         ul.append(li)
+        return ul
     }
 
-    console.log(window.data['documentation'])
-
-    if (window.data['documentation'].length !== undefined) {
-        let ul = document.createElement('ul')
-        window.data['documentation'].forEach((el) => {
-            createNewElementInList(ul, el)
+    let recurse = (array) => {
+        let ul = document.createElement('ul');
+        array.forEach(e => {
+            createNewElementInList(ul, e)
+            Object.keys(e).forEach(i => {
+                if (!isNaN(parseInt(i))) {
+                    let parent = recurse([e[i]])
+                    console.log(parent)
+                    ul.append(parent)
+                }
+            })
         })
-        parent.append(ul)
+        return ul
+    }
+
+    if (d.length !== undefined) {
+        parent.append(recurse(d))
     } else {
         document.getElementById('back').style.display = 'block'
         let article = document.createElement('article')
-
-        let d =  window.data['documentation']
-        let h1  = document.createElement('h1')
+        let h1 = document.createElement('h1')
         h1.innerText = d.title
 
         let p = document.createElement('p')
         p.innerText = d.content
 
-
-        article.append(h1, p )
+        article.append(h1, p)
         parent.append(article)
     }
-
-
-
 })()
 
 

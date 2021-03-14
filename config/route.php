@@ -5,6 +5,7 @@ use vendor\System\Router;
 $router = new Router();
 
 $router->setRoute("",  "HomeController/index");
+$router->setRoute("getLastDataHome",  "HomeController/getLastData", 'getLastDataHome', ['GET', 'POST']);
 //$router->setRoute("login",  "LoginController/index");
 $router->setRoute("login",  "AuthenticationController/_Login", 'login', ['GET', 'POST']);
 $router->setRoute("register",  "AuthenticationController/_Register", 'register', ['GET', 'POST']);

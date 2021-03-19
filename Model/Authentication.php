@@ -7,6 +7,12 @@ namespace Model;
 class Authentication extends Model
 {
     private static string $tableName = 'user';
+    private int $id;
+    private string $prenom;
+    private string $nom;
+    private string $username;
+    private string $mobile;
+    private string $password;
 
     public static function get($where): Authentication|bool
     {
@@ -24,58 +30,63 @@ class Authentication extends Model
         }
     }
 
+    public function setId($v)
+    {
+        $this->id = $v;
+    }
+
     public function setUsername($v)
     {
-        $this->attribute['username'] = $v;
+        $this->username = $v;
     }
 
     public function setPassword($v)
     {
-        $this->attribute['password'] = $v;
+        $this->password = $v;
     }
 
     public function setPrenom($v)
     {
-        $this->attribute['prenom'] = $v;
+        $this->prenom = $v;
     }
 
     public function setNom($v)
     {
-        $this->attribute['nom'] = $v;
+        $this->nom = $v;
     }
 
     public function setMobile($v)
     {
-        $this->attribute['mobile'] = $v;
+        $this->mobile = $v;
     }
 
     public function getId()
     {
-        return $this->attribute['id'];
+        return $this->id;
     }
 
     public function getUsername(): string
     {
-        return $this->attribute['username'];
+        return $this->username;
     }
 
     public function getPassword(): string
     {
-        return $this->attribute['password'];
+        return $this->password;
     }
 
     public function getPrenom(): string|null
     {
-        return $this->attribute['prenom'];
+        return $this->prenom;
     }
 
     public function getNom(): string|null
     {
-        return $this->attribute['nom'];
+        return $this->nom;
     }
 
     public function getMobile(): string|null
     {
-        return $this->attribute['mobile'];
+        return $this->mobile;
     }
 }

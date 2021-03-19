@@ -10,6 +10,26 @@ class AuthenticationController extends System
     {
         if ($request->isPOST())
         {
+            $user = new Authentication();
+//            $prenom = $request->get('firstname');
+//            $nom = $request->get('lastname');
+//            $email = $request->get('email');
+//            $tel = $request->get('mobilenumber');
+//            $password = $request->get('password');
+//            $user->setPrenom($prenom);
+//            $user->setNom($nom);
+//            $user->setUsername($email);
+//            $user->setMobile($tel);
+//            $user->setPassword($password);
+//            $user->setId("2");
+//            $user->setPrenom("a");
+//            $user->setNom("a");
+//            $user->setUsername("a");
+//            $user->setMobile("a");
+//            $user->setPassword("a");
+//            var_dump($user->getAllData("user"));
+//            var_dump($user->getAllData("user", ['id' => 1]));
+//            $user->create();
             $this->redirect('/');
         }
 

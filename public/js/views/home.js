@@ -87,11 +87,16 @@
 
    ws.onmessage = function (event){
 
+      let data = JSON.parse(event.data)
 
+      var xhttp = new XMLHttpRequest();
+
+      xhttp.open("POST", utils.getFullPath() + '/insertData', true);
+      xhttp.setRequestHeader("Content-Type", "application/json");
+      xhttp.send(JSON.stringify(data));
 
       widget.innerHTML = "";
       console.log(event.data);
-      let data = JSON.parse(event.data)
       data = data["capteurs"]
       for (let i = 0 ; i < data.length; ++i){
          let parsed = {name: data[i]['Nom'], type: "temp", current_value: data[i]["Valeur"], value_type: "°C", last_update: data[i]["Timestamp"], id: data[i]['Nom']}
